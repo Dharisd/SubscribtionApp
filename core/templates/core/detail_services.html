@@ -1,0 +1,130 @@
+{% extends "core/base.html" %}
+
+
+
+{% block content %}
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-6 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            {{service.name}}
+        </h2>
+
+<!-- component -->
+<!-- This is an example component -->
+
+
+  <div class="flex flex-col flex-wrap mb-4 space-y-4 md:flex-row md:items-end md:space-x-4">
+
+    <!-- Divs are used just to display the examples. Use only the button. -->
+
+    <div>
+        <button class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+          Add Subscriber
+        </button>
+      </div>
+    
+
+  </div>
+    
+    <div class="w-full overflow-hidden bg-white rounded-lg shadow-xs">
+
+        <div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class=" font-semibold text-gray-700">
+                    Name
+                </p>
+                <p>
+                    {{service.name}}
+                </p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="font-semibold text-gray-700">
+                    Billing Cycle
+                </p>
+                <p class= "text-gray-500">
+                    {{ service.billing_cycle }}
+                </p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="font-semibold text-gray-700">
+                    Number of subscribers
+                </p>
+                <p class= "text-gray-500">
+                    {{ service.subscribers.count }}
+                </p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="font-semibold text-gray-700">
+                    Active subscribers
+                </p>
+                <p class= "text-gray-500">
+                    x
+                </p>
+            </div>
+
+        </div>
+
+
+
+
+
+</div>
+
+
+<h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    Subscribers
+</h2>
+ 
+<div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full overflow-x-auto">
+      <table class="w-full whitespace-no-wrap">
+        <thead>
+          <tr
+            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+          >
+            <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Phone</th>
+          </tr>
+        </thead>
+        <tbody
+          class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+        >
+
+        {% if service.subscribers.all %}
+        {% for subscriber in service.subscribers.all %}
+          <tr class="text-gray-700 dark:text-gray-400" >
+            <td class="px-4 py-3">
+              <div class="flex items-center text-sm">
+                <!-- Avatar with inset shadow -->
+                <div >
+                <a class="font-semibold"">{{subscriber.name}}</a>
+                  <p class="text-xs text-gray-600 dark:text-gray-400">
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-sm">
+                {{subscriber.phone_number}}
+            </td>
+            <td class="px-4 py-3 text-xs">
+              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                Active
+              </span>
+            </td>
+
+          </tr>
+          {% endfor %}
+          {% endif %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+    </div>
+</main>
+
+
+{% endblock %}
